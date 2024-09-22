@@ -31,7 +31,7 @@ cd ..
 
 # C (Simple)
 cd c-simple
-emcc countup.c -o countup.js -O3 \
+emcc countup.c -o countup.js -O3 -flto --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
@@ -40,7 +40,7 @@ cd ..
 
 # C (Struct)
 cd c-struct
-emcc countup.c -o countup.js -O3 \
+emcc countup.c -o countup.js -O3 -flto --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
