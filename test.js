@@ -8,6 +8,7 @@ import initRust, {
 import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
 import initCStruct from "./c-struct/countup.js";
+import initCpp from "./cpp/countup.js";
 import { createStruct, createTypedArray } from "./c-struct/util.js";
 import { __collect as __collectWrap } from "./as-wrap/countup.js";
 import { __collect as __collectShift } from "./as-shift/countup.js";
@@ -17,6 +18,7 @@ import { assertEquals } from "@std/assert";
 await initRust();
 const cSimple = await initCSimple();
 const cStruct = await initCStruct();
+const cpp = await initCpp();
 
 const data = new Uint8Array(16777216);
 for (let i = 0; i < data.length; i++) {
@@ -79,4 +81,16 @@ Deno.test("C, emscripten 3.1.67 (Struct)", () => {
   cStruct._free(dataPtr);
   cStruct._free(resultPtr);
   cStruct._free(colorCountPtr);
+});
+Deno.test("C++, emscripten 3.1.67", () => {
+  const dataPtr = cpp._malloc(data.length);
+  cpp.HEAPU8.set(data, dataPtr);
+  const resultPtr = cpp._countColors(dataPtr, data.length);
+  const countC = new Uint32Array(cpp.HEAPU32.buffer, resultPtr, 16777216);
+  assertEquals(countJs.length, countC.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countC[i]);
+  }
+  cpp._free(dataPtr);
+  cpp._free(resultPtr);
 });
