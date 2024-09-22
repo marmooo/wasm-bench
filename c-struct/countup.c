@@ -29,7 +29,7 @@ typedef struct {
 #define TYPE_BigInt64Array 10
 
 EMSCRIPTEN_KEEPALIVE
-Uint32Array* countColors(Uint8Array array) {
+Uint32Array *countColors(Uint8Array array) {
   size_t uint32Length = array.length / 4;
   uint32_t *uint32Data = (uint32_t *)array.data;
   Uint32Array *colorCount = (Uint32Array *)malloc(sizeof(Uint32Array));
