@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@kitsonk/xhr": "jsr:@kitsonk/xhr@0.4.3",
+    "@std/assert": "jsr:@std/assert@1.0.5"
+  }
+}
