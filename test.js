@@ -6,14 +6,17 @@ import initRust, {
   count_colors as countColorsRust,
 } from "./rust/pkg/countup.js";
 import "@kitsonk/xhr";
-import initC from "./c/countup.js";
+import initCSimple from "./c-simple/countup.js";
+import initCStruct from "./c-struct/countup.js";
+import { createStruct, createTypedArray } from "./c-struct/util.js";
 import { __collect as __collectWrap } from "./as-wrap/countup.js";
 import { __collect as __collectShift } from "./as-shift/countup.js";
 import { __collect as __collectDataView } from "./as-dataview/countup.js";
 import { assertEquals } from "@std/assert";
 
 await initRust();
-const c = await initC();
+const cSimple = await initCSimple();
+const cStruct = await initCStruct();
 
 const data = new Uint8Array(16777216);
 for (let i = 0; i < data.length; i++) {
@@ -52,15 +55,28 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
     assertEquals(countJs[i], countRust[i]);
   }
 });
-Deno.test("C, emscripten 3.1.67", () => {
-  const dataPtr = c._malloc(data.length);
-  c.HEAPU8.set(data, dataPtr);
-  const resultPtr = c._countColors(dataPtr, data.length);
-  const countC = new Uint32Array(c.HEAPU32.buffer, resultPtr, 16777216);
+Deno.test("C, emscripten 3.1.67 (Simple)", () => {
+  const dataPtr = cSimple._malloc(data.length);
+  cSimple.HEAPU8.set(data, dataPtr);
+  const resultPtr = cSimple._countColors(dataPtr, data.length);
+  const countC = new Uint32Array(cSimple.HEAPU32.buffer, resultPtr, 16777216);
   assertEquals(countJs.length, countC.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countC[i]);
   }
-  c._free(dataPtr);
-  c._free(resultPtr);
+  cSimple._free(dataPtr);
+  cSimple._free(resultPtr);
+});
+Deno.test("C, emscripten 3.1.67 (Struct)", () => {
+  const dataPtr = createStruct(cStruct, data);
+  const resultPtr = cStruct._countColors(dataPtr);
+  const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
+  const countC = createTypedArray(cStruct, resultPtr);
+  assertEquals(countJs.length, countC.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countC[i]);
+  }
+  cStruct._free(dataPtr);
+  cStruct._free(resultPtr);
+  cStruct._free(colorCountPtr);
 });

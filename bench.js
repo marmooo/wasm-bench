@@ -6,13 +6,16 @@ import initRust, {
   count_colors as countColorsRust,
 } from "./rust/pkg/countup.js";
 import "@kitsonk/xhr";
-import initC from "./c/countup.js";
+import initCSimple from "./c-simple/countup.js";
+import initCStruct from "./c-struct/countup.js";
+import { createStruct, createTypedArray } from "./c-struct/util.js";
 import { __collect as __collectWrap } from "./as-wrap/countup.js";
 import { __collect as __collectShift } from "./as-shift/countup.js";
 import { __collect as __collectDataView } from "./as-dataview/countup.js";
 
 await initRust();
-const c = await initC();
+const cSimple = await initCSimple();
+const cStruct = await initCStruct();
 
 const data = new Uint8Array(16777216);
 for (let i = 0; i < data.length; i++) {
@@ -37,11 +40,20 @@ Deno.bench("AssemblyScript 0.27.29 (DataView)", () => {
 Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
   countColorsRust(data);
 });
-Deno.bench("C, emscripten 3.1.67", () => {
-  const dataPtr = c._malloc(data.length);
-  c.HEAPU8.set(data, dataPtr);
-  const resultPtr = c._countColors(dataPtr, data.length);
-  new Uint32Array(c.HEAPU32.buffer, resultPtr, 16777216);
-  c._free(dataPtr);
-  c._free(resultPtr);
+Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
+  const dataPtr = cSimple._malloc(data.length);
+  cSimple.HEAPU8.set(data, dataPtr);
+  const resultPtr = cSimple._countColors(dataPtr, data.length);
+  new Uint32Array(cSimple.HEAPU32.buffer, resultPtr, 16777216);
+  cSimple._free(dataPtr);
+  cSimple._free(resultPtr);
+});
+Deno.bench("C, emscripten 3.1.67 (Struct)", () => {
+  const dataPtr = createStruct(cStruct, data);
+  const resultPtr = cStruct._countColors(dataPtr);
+  const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
+  createTypedArray(cStruct, resultPtr);
+  cStruct._free(dataPtr);
+  cStruct._free(resultPtr);
+  cStruct._free(colorCountPtr);
 });

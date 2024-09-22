@@ -24,8 +24,22 @@ asc countup.ts -o countup.wasm --bindings esm \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
 
-# C
-cd c
+# C useful options
+# https://emscripten.org/docs/optimizing/Optimizing-Code.html
+# -s DISABLE_EXCEPTION_CATCHING=0
+#   printf() --> console.log()
+
+# C (Simple)
+cd c-simple
+emcc countup.c -o countup.js -O3 \
+  -s MODULARIZE \
+  -s EXPORT_ES6=1 \
+  -s ALLOW_MEMORY_GROWTH=1 \
+  -s EXPORTED_FUNCTIONS='["_malloc", "_free"]'
+cd ..
+
+# C (Struct)
+cd c-struct
 emcc countup.c -o countup.js -O3 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
