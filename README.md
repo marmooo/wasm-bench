@@ -1,7 +1,7 @@
 # wasm-bench
 
 A benchmark of JavaScript and Wasm written in various languages (AssemblyScript,
-Rust, C).
+Rust, C/C++).
 
 ## Benchmark
 
