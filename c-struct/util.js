@@ -56,19 +56,20 @@ function getType(typedArray) {
   throw new Error("Unsupported TypedArray type");
 }
 
+const typeString = [
+  "Uint8Array",
+  "Uint8ClampedArray",
+  "Int8Array",
+  "Uint16Array",
+  "Int16Array",
+  "Uint32Array",
+  "Int32Array",
+  "Float32Array",
+  "Float64Array",
+  "BigUint64Array",
+  "BigInt64Array",
+];
+
 function getTypeString(type) {
-  const typeString = [
-    "Uint8Array",
-    "Uint8ClampedArray",
-    "Int8Array",
-    "Uint16Array",
-    "Int16Array",
-    "Uint32Array",
-    "Int32Array",
-    "Float32Array",
-    "Float64Array",
-    "BigUint64Array",
-    "BigInt64Array",
-  ];
   return typeString[type];
 }
