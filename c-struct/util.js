@@ -20,6 +20,12 @@ export function createTypedArray(c, pointer) {
   return new globalThis[typeString](buffer, dataPtr, length);
 }
 
+export function freeStruct(c, structPtr) {
+  const dataPtr = c.HEAP32[structPtr / 4];
+  c._free(structPtr);
+  c._free(dataPtr);
+}
+
 function getHeapName(typedArray) {
   if (typedArray instanceof Uint8Array) return "HEAPU8";
   if (typedArray instanceof Uint8ClampedArray) return "HEAPU8";

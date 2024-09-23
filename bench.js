@@ -9,7 +9,7 @@ import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
 import initCStruct from "./c-struct/countup.js";
 import initCpp from "./cpp/countup.js";
-import { createStruct, createTypedArray } from "./c-struct/util.js";
+import { createStruct, createTypedArray, freeStruct } from "./c-struct/util.js";
 import { __collect as __collectWrap } from "./as-wrap/countup.js";
 import { __collect as __collectShift } from "./as-shift/countup.js";
 import { __collect as __collectDataView } from "./as-dataview/countup.js";
@@ -53,11 +53,9 @@ Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
 Deno.bench("C, emscripten 3.1.67 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
-  const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
   createTypedArray(cStruct, resultPtr);
-  cStruct._free(dataPtr);
-  cStruct._free(resultPtr);
-  cStruct._free(colorCountPtr);
+  freeStruct(cStruct, dataPtr);
+  freeStruct(cStruct, resultPtr);
 });
 Deno.bench("C++, emscripten 3.1.67", () => {
   const dataPtr = cpp._malloc(data.length);
