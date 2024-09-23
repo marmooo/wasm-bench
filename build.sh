@@ -24,10 +24,11 @@ asc countup.ts -o countup.wasm --bindings esm \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
 
-# C useful options
+# C/C++ useful options
 # https://emscripten.org/docs/optimizing/Optimizing-Code.html
 # -s DISABLE_EXCEPTION_CATCHING=0
 #   printf() --> console.log()
+#   std::cout --> console.log()
 
 # C (Simple)
 cd c-simple
