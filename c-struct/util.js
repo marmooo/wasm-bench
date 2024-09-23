@@ -21,7 +21,7 @@ export function createTypedArray(c, pointer) {
 }
 
 export function freeStruct(c, structPtr) {
-  const dataPtr = c.HEAP32[structPtr / 4];
+  const dataPtr = c.HEAPU32[structPtr / 4];
   c._free(structPtr);
   c._free(dataPtr);
 }
