@@ -35,7 +35,7 @@ emcc countup.c -o countup.js -O3 -flto --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
-  -s EXPORTED_FUNCTIONS='["_malloc", "_free"]'
+  -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
 
 # C (Struct)
@@ -44,7 +44,7 @@ emcc countup.c -o countup.js -O3 -flto --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
-  -s EXPORTED_FUNCTIONS='["_malloc", "_free"]'
+  -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
 
 # C++
@@ -53,5 +53,5 @@ emcc countup.cpp -o countup.js -O3 -flto --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
-  -s EXPORTED_FUNCTIONS='["_malloc", "_free"]'
+  -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
