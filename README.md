@@ -11,14 +11,15 @@ Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
 
 benchmark                           time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 ----------------------------------- ----------------------------- --------------------- --------------------------
-JavaScript, Deno 1.46.3                    164.3 ms           6.1 (163.5 ms … 166.1 ms) 164.5 ms 166.1 ms 166.1 ms
-AssemblyScript 0.27.29 (Wrap)              153.0 ms           6.5 (146.1 ms … 155.7 ms) 153.5 ms 155.7 ms 155.7 ms
-AssemblyScript 0.27.29 (Shift)             177.5 ms           5.6 (176.6 ms … 178.5 ms) 177.6 ms 178.5 ms 178.5 ms
-AssemblyScript 0.27.29 (DataView)          157.8 ms           6.3 (157.4 ms … 158.4 ms) 158.0 ms 158.4 ms 158.4 ms
-Rust 1.81.0, wasm-bindgen 0.2.93           149.3 ms           6.7 (144.7 ms … 152.5 ms) 150.3 ms 152.5 ms 152.5 ms
-C, emscripten 3.1.67 (Simple)              101.3 ms           9.9 ( 96.8 ms … 102.3 ms) 102.1 ms 102.3 ms 102.3 ms
-C, emscripten 3.1.67 (Struct)               98.9 ms          10.1 ( 92.9 ms … 100.0 ms)  99.7 ms 100.0 ms 100.0 ms
-C++, emscripten 3.1.67                     101.5 ms           9.9 (100.9 ms … 101.9 ms) 101.7 ms 101.9 ms 101.9 ms
+JavaScript, Deno 1.46.3                    166.8 ms           6.0 (164.1 ms … 171.8 ms) 169.6 ms 171.8 ms 171.8 ms
+AssemblyScript 0.27.29 (Wrap)              153.8 ms           6.5 (150.1 ms … 155.0 ms) 154.4 ms 155.0 ms 155.0 ms
+AssemblyScript 0.27.29 (Shift)             175.2 ms           5.7 (174.1 ms … 175.8 ms) 175.4 ms 175.8 ms 175.8 ms
+AssemblyScript 0.27.29 (DataView)          156.5 ms           6.4 (156.0 ms … 157.8 ms) 156.5 ms 157.8 ms 157.8 ms
+Rust 1.81.0, wasm-bindgen 0.2.93           147.4 ms           6.8 (142.9 ms … 154.1 ms) 147.4 ms 154.1 ms 154.1 ms
+C, emscripten 3.1.67 (Simple)              100.7 ms           9.9 ( 99.7 ms … 101.5 ms) 100.9 ms 101.5 ms 101.5 ms
+C, emscripten 3.1.67 (Struct)              100.0 ms          10.0 ( 93.0 ms … 101.5 ms) 100.9 ms 101.5 ms 101.5 ms
+C++, emscripten 3.1.67 (Simple)            102.6 ms           9.7 (100.5 ms … 103.3 ms) 103.0 ms 103.3 ms 103.3 ms
+C++, emscripten 3.1.67 (Class)             102.1 ms           9.8 (101.6 ms … 103.4 ms) 102.2 ms 103.4 ms 103.4 ms
 ```
 
 ## Requirements
