@@ -53,7 +53,7 @@ Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
 Deno.bench("C, emscripten 3.1.67 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
-  createTypedArray(cStruct, resultPtr);
+  createTypedArray(cStruct, resultPtr, Uint32Array);
   freeStruct(cStruct, dataPtr);
   freeStruct(cStruct, resultPtr);
 });

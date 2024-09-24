@@ -73,7 +73,7 @@ Deno.test("C, emscripten 3.1.67 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
-  const countC = createTypedArray(cStruct, resultPtr);
+  const countC = createTypedArray(cStruct, resultPtr, Uint32Array);
   assertEquals(countJs.length, countC.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countC[i]);
