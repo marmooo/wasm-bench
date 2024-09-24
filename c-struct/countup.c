@@ -1,7 +1,5 @@
 #include <emscripten/emscripten.h>
 #include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
 typedef struct {
   uint8_t *buffer;

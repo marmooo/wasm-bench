@@ -1,7 +1,5 @@
 #include <emscripten/emscripten.h>
 #include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
 EMSCRIPTEN_KEEPALIVE
 uint32_t *countColors(uint8_t *uint8Data, size_t length) {
