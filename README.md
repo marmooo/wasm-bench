@@ -41,6 +41,7 @@ bash build.sh
 ```
 deno bench --allow-read
 deno test --allow-read
+deno run --allow-read size.js
 ```
 
 ## License
