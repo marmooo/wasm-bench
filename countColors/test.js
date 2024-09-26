@@ -5,6 +5,7 @@ import { countColors as countColorsAsDataView } from "./as-dataview/countup.js";
 import initRust, {
   count_colors as countColorsRust,
 } from "./rust/pkg/countup.js";
+import "./go/wasm_exec.js";
 import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
 import initCStruct from "./c-struct/countup.js";
@@ -21,6 +22,11 @@ const cSimple = await initCSimple();
 const cStruct = await initCStruct();
 const cppSimple = await initCppSimple();
 const cppClass = await initCppClass();
+
+const go = new Go();
+const goWasmCode = await Deno.readFile("./go/countup.wasm");
+const goWasmModule = await WebAssembly.compile(goWasmCode);
+const goInstance = await WebAssembly.instantiate(goWasmModule, go.importObject);
 
 const data = new Uint8Array(16777216);
 for (let i = 0; i < data.length; i++) {
@@ -57,6 +63,19 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
   assertEquals(countJs.length, countRust.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countRust[i]);
+  }
+});
+Deno.test("Go 1.23.1, TinyGo 0.33.0", () => {
+  go.run(goInstance);
+  const { countColors, malloc, memory } = goInstance.exports;
+  const dataPtr = malloc(data.length);
+  const copied = new Uint8Array(memory.buffer, dataPtr, data.length);
+  copied.set(data);
+  const resultPtr = countColors(dataPtr, data.length);
+  const countGo = new Uint32Array(memory.buffer, resultPtr, 16777216);
+  assertEquals(countJs.length, countGo.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countGo[i]);
   }
 });
 Deno.test("C, emscripten 3.1.67 (Simple)", () => {

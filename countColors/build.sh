@@ -65,3 +65,7 @@ emcc countup.cpp -o countup.js -O3 -flto --closure 1 \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1
 cd ..
+
+# Go
+GOOS=js GOARCH=wasm tinygo build -o countup.wasm countup.go
+cp "$(tinygo env TINYGOROOT)/targets/wasm_exec.js" .
