@@ -5,7 +5,7 @@ Rust, C/C++).
 
 ## Benchmark
 
-### countColors
+### countColors ([details](countColors/details.md))
 
 ```
     CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
@@ -27,7 +27,7 @@ C++, emscripten 3.1.67 (Simple)                    100.4 ms          10.0 ( 96.0
 C++, emscripten 3.1.67 (Class)                     103.6 ms           9.7 (102.4 ms … 105.8 ms) 103.8 ms 105.8 ms 105.8 ms
 ```
 
-### getColors
+### getColors ([details](getColors/details.md))
 
 ```
     CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
