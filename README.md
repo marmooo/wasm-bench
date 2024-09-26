@@ -59,6 +59,7 @@ cd [task]  # countColors, getColors, etc.
 deno bench --allow-read
 deno test --allow-read
 deno run --allow-read size.js
+deno run --allow-read firstRun.js
 ```
 
 ## License
