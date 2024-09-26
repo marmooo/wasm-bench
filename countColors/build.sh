@@ -1,4 +1,5 @@
 # Rust
+# https://rustwasm.github.io/docs/book/reference/code-size.html
 cd rust
 wasm-pack build --target web --release
 cd ..
