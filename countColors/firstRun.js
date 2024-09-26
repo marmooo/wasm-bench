@@ -16,6 +16,13 @@ import { __collect as __collectWrap } from "./as-wrap/countup.js";
 import { __collect as __collectShift } from "./as-shift/countup.js";
 import { __collect as __collectDataView } from "./as-dataview/countup.js";
 
+async function initGoInstance(path) {
+  const wasmCode = await Deno.readFile(path);
+  const wasmModule = await WebAssembly.compile(wasmCode);
+  const instance = await WebAssembly.instantiate(wasmModule, go.importObject);
+  return instance;
+}
+
 await initRust();
 const cSimple = await initCSimple();
 const cStruct = await initCStruct();
@@ -23,9 +30,9 @@ const cppSimple = await initCppSimple();
 const cppClass = await initCppClass();
 
 const go = new Go();
-const goWasmCode = await Deno.readFile("./go/countup.wasm");
-const goWasmModule = await WebAssembly.compile(goWasmCode);
-const goInstance = await WebAssembly.instantiate(goWasmModule, go.importObject);
+const goConservative = await initGoInstance("./go/countup-conservative.wasm");
+const goLeaking = await initGoInstance("./go/countup-leaking.wasm");
+const goPrecise = await initGoInstance("./go/countup-precise.wasm");
 
 function check(name, callback) {
   console.time(name);
@@ -56,9 +63,27 @@ check("AssemblyScript 0.27.29 (DataView)", () => {
 check("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
   countColorsRust(data);
 });
-check("Go, 1.23.1, TinyGo 0.33.0", () => {
-  go.run(goInstance);
-  const { countColors, malloc, memory } = goInstance.exports;
+check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative", () => {
+  go.run(goConservative);
+  const { countColors, malloc, memory } = goConservative.exports;
+  const dataPtr = malloc(data.length);
+  const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
+  copiedData.set(data);
+  const resultPtr = countColors(dataPtr, data.length);
+  new Uint32Array(memory.buffer, resultPtr, 16777216);
+});
+check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking", () => {
+  go.run(goLeaking);
+  const { countColors, malloc, memory } = goLeaking.exports;
+  const dataPtr = malloc(data.length);
+  const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
+  copiedData.set(data);
+  const resultPtr = countColors(dataPtr, data.length);
+  new Uint32Array(memory.buffer, resultPtr, 16777216);
+});
+check("Go, 1.23.1, TinyGo 0.33.0 GC=precise", () => {
+  go.run(goPrecise);
+  const { countColors, malloc, memory } = goPrecise.exports;
   const dataPtr = malloc(data.length);
   const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
   copiedData.set(data);

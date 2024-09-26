@@ -67,5 +67,12 @@ emcc countup.cpp -o countup.js -O3 -flto --closure 1 \
 cd ..
 
 # Go
-GOOS=js GOARCH=wasm tinygo build -o countup.wasm countup.go
+# https://tinygo.org/docs/reference/usage/important-options/
+cd go
+GOOS=js GOARCH=wasm tinygo build -o countup-conservative.wasm \
+  -opt=s -gc=conservative countup.go
+GOOS=js GOARCH=wasm tinygo build -o countup-leaking.wasm \
+  -opt=s -gc=leaking countup.go
+GOOS=js GOARCH=wasm tinygo build -o countup-precise.wasm \
+  -opt=s -gc=precise countup.go
 cp "$(tinygo env TINYGOROOT)/targets/wasm_exec.js" .
