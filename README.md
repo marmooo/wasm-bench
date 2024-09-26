@@ -5,6 +5,8 @@ Rust, C/C++).
 
 ## Benchmark
 
+### countColors
+
 ```
     CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
 Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
@@ -22,6 +24,19 @@ C++, emscripten 3.1.67 (Simple)            102.6 ms           9.7 (100.5 ms … 
 C++, emscripten 3.1.67 (Class)             102.1 ms           9.8 (101.6 ms … 103.4 ms) 102.2 ms 103.4 ms 103.4 ms
 ```
 
+### getColors
+
+```
+    CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
+Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
+
+benchmark                         time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+--------------------------------- ----------------------------- --------------------- --------------------------
+JavaScript, Deno 1.46.3                  194.3 ms           5.1 (192.4 ms … 199.0 ms) 194.2 ms 199.0 ms 199.0 ms
+AssemblyScript 0.27.29 (Number)          277.1 ms           3.6 (245.9 ms … 331.5 ms) 272.0 ms 331.5 ms 331.5 ms
+AssemblyScript 0.27.29 (Class)           error
+```
+
 ## Requirements
 
 - [Deno](https://github.com/denoland/deno)
@@ -33,12 +48,14 @@ C++, emscripten 3.1.67 (Class)             102.1 ms           9.8 (101.6 ms … 
 ## Build
 
 ```
+cd [task]  # countColors, getColors, etc.
 bash build.sh
 ```
 
 ## Test
 
 ```
+cd [task]  # countColors, getColors, etc.
 deno bench --allow-read
 deno test --allow-read
 deno run --allow-read size.js
