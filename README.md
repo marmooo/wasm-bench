@@ -43,6 +43,8 @@ AssemblyScript 0.27.29 (Class)           error
 - [AssemblyScript](https://github.com/AssemblyScript/assemblyscript)
 - [Rust](https://github.com/rust-lang/rust) &
   [wasm-pack](https://github.com/rustwasm/wasm-pack)
+- [Go](https://github.com/golang/go) &
+  [TinyGo](https://github.com/tinygo-org/tinygo)
 - [emscripten](https://github.com/emscripten-core/emscripten)
 
 ## Build
