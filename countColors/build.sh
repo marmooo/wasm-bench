@@ -1,6 +1,18 @@
-# Rust
+# Rust options
 # https://rustwasm.github.io/docs/book/reference/code-size.html
-cd rust
+
+# Rust (Pointer)
+cd rust-pointer
+wasm-pack build --target web --release
+cd ..
+
+# Rust (Box)
+cd rust-box
+wasm-pack build --target web --release
+cd ..
+
+# Rust (Vec)
+cd rust-vec
 wasm-pack build --target web --release
 cd ..
 

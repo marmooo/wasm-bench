@@ -10,20 +10,23 @@ A benchmark of JavaScript and Wasm written in various languages.
     CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
 Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
 
-benchmark                                   time/iter (avg)        iter/s      (min … max)           p75      p99     p995
-------------------------------------------- ----------------------------- --------------------- --------------------------
-JavaScript, Deno 1.46.3                            166.3 ms           6.0 (160.8 ms … 174.1 ms) 166.5 ms 174.1 ms 174.1 ms
-AssemblyScript 0.27.29 (Wrap)                      152.5 ms           6.6 (151.4 ms … 155.7 ms) 153.0 ms 155.7 ms 155.7 ms
-AssemblyScript 0.27.29 (Shift)                     177.8 ms           5.6 (177.0 ms … 178.8 ms) 178.3 ms 178.8 ms 178.8 ms
-AssemblyScript 0.27.29 (DataView)                  158.3 ms           6.3 (157.5 ms … 160.1 ms) 158.3 ms 160.1 ms 160.1 ms
-Rust 1.81.0, wasm-bindgen 0.2.93                   150.1 ms           6.7 (149.7 ms … 151.0 ms) 150.4 ms 151.0 ms 151.0 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=conservative          141.0 ms           7.1 (125.9 ms … 178.1 ms) 139.1 ms 178.1 ms 178.1 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=leaking               100.8 ms           9.9 ( 98.4 ms … 102.7 ms) 101.6 ms 102.7 ms 102.7 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=precise               140.2 ms           7.1 (139.0 ms … 144.1 ms) 140.1 ms 144.1 ms 144.1 ms
-C, emscripten 3.1.67 (Simple)                      101.5 ms           9.9 (100.7 ms … 102.2 ms) 101.7 ms 102.2 ms 102.2 ms
-C, emscripten 3.1.67 (Struct)                       97.4 ms          10.3 ( 87.1 ms …  98.9 ms)  98.5 ms  98.9 ms  98.9 ms
-C++, emscripten 3.1.67 (Simple)                    100.4 ms          10.0 ( 96.0 ms … 101.3 ms) 100.9 ms 101.3 ms 101.3 ms
-C++, emscripten 3.1.67 (Class)                     103.6 ms           9.7 (102.4 ms … 105.8 ms) 103.8 ms 105.8 ms 105.8 ms
+benchmark                                    time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+-------------------------------------------- ----------------------------- --------------------- --------------------------
+JavaScript, Deno 1.46.3                             164.5 ms           6.1 (158.8 ms … 170.6 ms) 165.8 ms 170.6 ms 170.6 ms
+AssemblyScript 0.27.29 (Wrap)                       151.4 ms           6.6 (150.4 ms … 152.6 ms) 151.6 ms 152.6 ms 152.6 ms
+AssemblyScript 0.27.29 (Shift)                      174.3 ms           5.7 (170.4 ms … 177.6 ms) 174.7 ms 177.6 ms 177.6 ms
+AssemblyScript 0.27.29 (DataView)                   155.9 ms           6.4 (155.5 ms … 156.8 ms) 156.0 ms 156.8 ms 156.8 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)          104.4 ms           9.6 (103.8 ms … 104.8 ms) 104.5 ms 104.8 ms 104.8 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Box)              153.2 ms           6.5 (147.9 ms … 177.3 ms) 151.9 ms 177.3 ms 177.3 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)              149.9 ms           6.7 (145.8 ms … 153.8 ms) 150.0 ms 153.8 ms 153.8 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)           147.2 ms           6.8 (141.3 ms … 149.5 ms) 147.8 ms 149.5 ms 149.5 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=conservative           138.9 ms           7.2 (138.2 ms … 139.2 ms) 139.1 ms 139.2 ms 139.2 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=leaking                 98.5 ms          10.2 ( 80.0 ms … 101.6 ms) 101.0 ms 101.6 ms 101.6 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=precise                135.3 ms           7.4 (134.5 ms … 135.7 ms) 135.5 ms 135.7 ms 135.7 ms
+C, emscripten 3.1.67 (Simple)                       102.2 ms           9.8 (101.3 ms … 102.9 ms) 102.5 ms 102.9 ms 102.9 ms
+C, emscripten 3.1.67 (Struct)                       101.0 ms           9.9 (100.5 ms … 101.5 ms) 101.3 ms 101.5 ms 101.5 ms
+C++, emscripten 3.1.67 (Simple)                     101.0 ms           9.9 (100.6 ms … 101.3 ms) 101.2 ms 101.3 ms 101.3 ms
+C++, emscripten 3.1.67 (Class)                      105.5 ms           9.5 (102.6 ms … 107.5 ms) 105.7 ms 107.5 ms 107.5 ms
 ```
 
 ### getColors ([details](getColors/details.md))

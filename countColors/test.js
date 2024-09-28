@@ -2,9 +2,19 @@ import { countColors as countColorsJs } from "./js/countup.js";
 import { countColors as countColorsAsWrap } from "./as-wrap/countup.js";
 import { countColors as countColorsAsShift } from "./as-shift/countup.js";
 import { countColors as countColorsAsDataView } from "./as-dataview/countup.js";
-import initRust, {
-  count_colors as countColorsRust,
-} from "./rust/pkg/countup.js";
+import initRustPointer, {
+  count_colors as count_colors_pointer,
+  free as free_pointer,
+} from "./rust-pointer/pkg/countup.js";
+import initRustBox, {
+  count_colors as count_colors_box,
+} from "./rust-box/pkg/countup.js";
+import initRustVec, {
+  count_colors as count_colors_vec,
+} from "./rust-vec/pkg/countup.js";
+import initRustUint32, {
+  count_colors as count_colors_uint32,
+} from "./rust-uint32/pkg/countup.js";
 import "./go/wasm_exec.js";
 import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
@@ -24,7 +34,10 @@ async function initGoInstance(path) {
   return instance;
 }
 
-await initRust();
+const rustPointer = await initRustPointer();
+await initRustBox();
+await initRustVec();
+await initRustUint32();
 const cSimple = await initCSimple();
 const cStruct = await initCStruct();
 const cppSimple = await initCppSimple();
@@ -65,8 +78,35 @@ Deno.test("AssemblyScript 0.27.29 (DataView)", () => {
   }
   __collectDataView(); // --runtime minimal --exportRuntime
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
-  const countRust = countColorsRust(data);
+Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)", () => {
+  const resultPtr = count_colors_pointer(data);
+  const countRust = new Uint32Array(
+    rustPointer.memory.buffer,
+    resultPtr,
+    16777216,
+  );
+  assertEquals(countJs.length, countRust.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countRust[i]);
+  }
+  free_pointer(resultPtr, 16777216);
+});
+Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Box)", () => {
+  const countRust = count_colors_box(data);
+  assertEquals(countJs.length, countRust.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countRust[i]);
+  }
+});
+Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
+  const countRust = count_colors_vec(data);
+  assertEquals(countJs.length, countRust.length);
+  for (let i = 0; i < countJs.length; i++) {
+    assertEquals(countJs[i], countRust[i]);
+  }
+});
+Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
+  const countRust = count_colors_uint32(data);
   assertEquals(countJs.length, countRust.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countRust[i]);

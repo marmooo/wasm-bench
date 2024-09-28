@@ -3,18 +3,21 @@
 ## First Run
 
 ```
-JavaScript, Deno 1.46.3: 155ms
-AssemblyScript 0.27.29 (Wrap): 323ms
-AssemblyScript 0.27.29 (Shift): 322ms
-AssemblyScript 0.27.29 (DataView): 325ms
-Rust 1.81.0, wasm-bindgen 0.2.93: 312ms
-Go, 1.23.1, TinyGo 0.33.0 GC=conservative: 30692ms
-Go, 1.23.1, TinyGo 0.33.0 GC=leaking: 239ms
-Go, 1.23.1, TinyGo 0.33.0 GC=precise: 360ms
-C, emscripten 3.1.67 (Simple): 190ms
-C, emscripten 3.1.67 (Struct): 188ms
-C++, emscripten 3.1.67 (Simple): 202ms
-C++, emscripten 3.1.67 (Class): 225ms
+JavaScript, Deno 1.46.3: 151ms
+AssemblyScript 0.27.29 (Wrap): 329ms
+AssemblyScript 0.27.29 (Shift): 319ms
+AssemblyScript 0.27.29 (DataView): 336ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer): 223ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Box): 292ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Vec): 293ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32): 288ms
+Go, 1.23.1, TinyGo 0.33.0 GC=conservative: 29138ms
+Go, 1.23.1, TinyGo 0.33.0 GC=leaking: 226ms
+Go, 1.23.1, TinyGo 0.33.0 GC=precise: 309ms
+C, emscripten 3.1.67 (Simple): 185ms
+C, emscripten 3.1.67 (Struct): 185ms
+C++, emscripten 3.1.67 (Simple): 185ms
+C++, emscripten 3.1.67 (Class): 198ms
 ```
 
 ## Size
@@ -30,5 +33,8 @@ cpp-simple/countup.wasm 7554
 go/countup-conservative.wasm 90496
 go/countup-leaking.wasm 74300
 go/countup-precise.wasm 91887
-rust/pkg/countup_bg.wasm 8253
+rust-box/pkg/countup_bg.wasm 8254
+rust-pointer/pkg/countup_bg.wasm 8184
+rust-uint32/pkg/countup_bg.wasm 10111
+rust-vec/pkg/countup_bg.wasm 8253
 ```

@@ -2,9 +2,19 @@ import { countColors as countColorsJs } from "./js/countup.js";
 import { countColors as countColorsAsWrap } from "./as-wrap/countup.js";
 import { countColors as countColorsAsShift } from "./as-shift/countup.js";
 import { countColors as countColorsAsDataView } from "./as-dataview/countup.js";
-import initRust, {
-  count_colors as countColorsRust,
-} from "./rust/pkg/countup.js";
+import initRustPointer, {
+  count_colors as count_colors_pointer,
+  free as free_pointer,
+} from "./rust-pointer/pkg/countup.js";
+import initRustBox, {
+  count_colors as count_colors_box,
+} from "./rust-box/pkg/countup.js";
+import initRustVec, {
+  count_colors as count_colors_vec,
+} from "./rust-vec/pkg/countup.js";
+import initRustUint32, {
+  count_colors as count_colors_uint32,
+} from "./rust-uint32/pkg/countup.js";
 import "./go/wasm_exec.js";
 import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
@@ -23,7 +33,10 @@ async function initGoInstance(path) {
   return instance;
 }
 
-await initRust();
+const rustPointer = await initRustPointer();
+await initRustBox();
+await initRustVec();
+await initRustUint32();
 const cSimple = await initCSimple();
 const cStruct = await initCStruct();
 const cppSimple = await initCppSimple();
@@ -60,8 +73,19 @@ check("AssemblyScript 0.27.29 (DataView)", () => {
   countColorsAsDataView(data);
   __collectDataView(); // --runtime minimal --exportRuntime
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
-  countColorsRust(data);
+check("Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)", () => {
+  const resultPtr = count_colors_pointer(data);
+  new Uint32Array(rustPointer.memory.buffer, resultPtr, 16777216);
+  free_pointer(resultPtr, 16777216);
+});
+check("Rust 1.81.0, wasm-bindgen 0.2.93 (Box)", () => {
+  count_colors_box(data);
+});
+check("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
+  count_colors_vec(data);
+});
+check("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
+  count_colors_uint32(data);
 });
 check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative", () => {
   go.run(goConservative);
