@@ -65,7 +65,7 @@ for (let i = 0; i < data.length; i++) {
 }
 const countJs = countColorsJs(data);
 
-Deno.test("AssemblyScript 0.27.29 (Wrap)", () => {
+Deno.test("AssemblyScript 0.27.30 (Wrap)", () => {
   const countAs = countColorsAsWrap(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {
@@ -73,7 +73,7 @@ Deno.test("AssemblyScript 0.27.29 (Wrap)", () => {
   }
   __collectWrap(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.29 (Shift)", () => {
+Deno.test("AssemblyScript 0.27.30 (Shift)", () => {
   const countAs = countColorsAsShift(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {
@@ -81,7 +81,7 @@ Deno.test("AssemblyScript 0.27.29 (Shift)", () => {
   }
   __collectShift(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.29 (DataView)", () => {
+Deno.test("AssemblyScript 0.27.30 (DataView)", () => {
   const countAs = countColorsAsDataView(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {

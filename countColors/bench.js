@@ -68,15 +68,15 @@ for (let i = 0; i < data.length; i++) {
 Deno.bench("JavaScript, Deno 1.46.3", () => {
   countColorsJs(data);
 });
-Deno.bench("AssemblyScript 0.27.29 (Wrap)", () => {
+Deno.bench("AssemblyScript 0.27.30 (Wrap)", () => {
   countColorsAsWrap(data);
   __collectWrap(); // --runtime minimal --exportRuntime
 });
-Deno.bench("AssemblyScript 0.27.29 (Shift)", () => {
+Deno.bench("AssemblyScript 0.27.30 (Shift)", () => {
   countColorsAsShift(data);
   __collectShift(); // --runtime minimal --exportRuntime
 });
-Deno.bench("AssemblyScript 0.27.29 (DataView)", () => {
+Deno.bench("AssemblyScript 0.27.30 (DataView)", () => {
   countColorsAsDataView(data);
   __collectDataView(); // --runtime minimal --exportRuntime
 });

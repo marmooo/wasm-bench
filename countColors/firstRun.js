@@ -74,15 +74,15 @@ for (let i = 0; i < data.length; i++) {
 check("JavaScript, Deno 1.46.3", () => {
   countColorsJs(data);
 });
-check("AssemblyScript 0.27.29 (Wrap)", () => {
+check("AssemblyScript 0.27.30 (Wrap)", () => {
   countColorsAsWrap(data);
   __collectWrap(); // --runtime minimal --exportRuntime
 });
-check("AssemblyScript 0.27.29 (Shift)", () => {
+check("AssemblyScript 0.27.30 (Shift)", () => {
   countColorsAsShift(data);
   __collectShift(); // --runtime minimal --exportRuntime
 });
-check("AssemblyScript 0.27.29 (DataView)", () => {
+check("AssemblyScript 0.27.30 (DataView)", () => {
   countColorsAsDataView(data);
   __collectDataView(); // --runtime minimal --exportRuntime
 });
