@@ -12,21 +12,21 @@ Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
 
 benchmark                                    time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 -------------------------------------------- ----------------------------- --------------------- --------------------------
-JavaScript, Deno 1.46.3                             164.5 ms           6.1 (158.8 ms … 170.6 ms) 165.8 ms 170.6 ms 170.6 ms
-AssemblyScript 0.27.29 (Wrap)                       151.4 ms           6.6 (150.4 ms … 152.6 ms) 151.6 ms 152.6 ms 152.6 ms
-AssemblyScript 0.27.29 (Shift)                      174.3 ms           5.7 (170.4 ms … 177.6 ms) 174.7 ms 177.6 ms 177.6 ms
-AssemblyScript 0.27.29 (DataView)                   155.9 ms           6.4 (155.5 ms … 156.8 ms) 156.0 ms 156.8 ms 156.8 ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)          104.4 ms           9.6 (103.8 ms … 104.8 ms) 104.5 ms 104.8 ms 104.8 ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Box)              153.2 ms           6.5 (147.9 ms … 177.3 ms) 151.9 ms 177.3 ms 177.3 ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)              149.9 ms           6.7 (145.8 ms … 153.8 ms) 150.0 ms 153.8 ms 153.8 ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)           147.2 ms           6.8 (141.3 ms … 149.5 ms) 147.8 ms 149.5 ms 149.5 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=conservative           138.9 ms           7.2 (138.2 ms … 139.2 ms) 139.1 ms 139.2 ms 139.2 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=leaking                 98.5 ms          10.2 ( 80.0 ms … 101.6 ms) 101.0 ms 101.6 ms 101.6 ms
-Go, 1.23.1, TinyGo 0.33.0 GC=precise                135.3 ms           7.4 (134.5 ms … 135.7 ms) 135.5 ms 135.7 ms 135.7 ms
-C, emscripten 3.1.67 (Simple)                       102.2 ms           9.8 (101.3 ms … 102.9 ms) 102.5 ms 102.9 ms 102.9 ms
-C, emscripten 3.1.67 (Struct)                       101.0 ms           9.9 (100.5 ms … 101.5 ms) 101.3 ms 101.5 ms 101.5 ms
-C++, emscripten 3.1.67 (Simple)                     101.0 ms           9.9 (100.6 ms … 101.3 ms) 101.2 ms 101.3 ms 101.3 ms
-C++, emscripten 3.1.67 (Class)                      105.5 ms           9.5 (102.6 ms … 107.5 ms) 105.7 ms 107.5 ms 107.5 ms
+JavaScript, Deno 1.46.3                                     163.9 ms           6.1 (157.0 ms … 169.1 ms) 166.7 ms 169.1 ms 169.1 ms
+AssemblyScript 0.27.30 (Wrap)                               151.0 ms           6.6 (150.5 ms … 151.9 ms) 151.1 ms 151.9 ms 151.9 ms
+AssemblyScript 0.27.30 (Shift)                              175.2 ms           5.7 (174.2 ms … 177.1 ms) 175.7 ms 177.1 ms 177.1 ms
+AssemblyScript 0.27.30 (DataView)                           155.8 ms           6.4 (152.3 ms … 156.9 ms) 156.2 ms 156.9 ms 156.9 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)                  104.0 ms           9.6 (102.5 ms … 104.7 ms) 104.5 ms 104.7 ms 104.7 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Box)                      148.4 ms           6.7 (147.5 ms … 149.4 ms) 148.7 ms 149.4 ms 149.4 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)                      150.2 ms           6.7 (149.4 ms … 150.9 ms) 150.7 ms 150.9 ms 150.9 ms
+Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)                   147.6 ms           6.8 (143.3 ms … 150.0 ms) 148.4 ms 150.0 ms 150.0 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)                99.5 ms          10.1 ( 94.6 ms … 101.8 ms) 101.0 ms 101.8 ms 101.8 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)          141.5 ms           7.1 (137.6 ms … 151.9 ms) 141.7 ms 151.9 ms 151.9 ms
+Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)               139.4 ms           7.2 (133.4 ms … 142.9 ms) 141.3 ms 142.9 ms 142.9 ms
+C, emscripten 3.1.67 (Simple)                               104.3 ms           9.6 ( 96.8 ms … 107.1 ms) 106.8 ms 107.1 ms 107.1 ms
+C, emscripten 3.1.67 (Struct)                                97.2 ms          10.3 ( 94.0 ms …  99.7 ms)  98.6 ms  99.7 ms  99.7 ms
+C++, emscripten 3.1.67 (Simple)                             110.8 ms           9.0 ( 99.4 ms … 119.8 ms) 115.9 ms 119.8 ms 119.8 ms
+C++, emscripten 3.1.67 (Class)                              111.8 ms           8.9 (103.4 ms … 119.0 ms) 115.3 ms 119.0 ms 119.0 ms
 ```
 
 ### getColors ([details](getColors/details.md))
