@@ -127,17 +127,19 @@ check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
+// TODO: memory leak
+go.run(goClassLeaking);
 check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
-  go.run(goClassLeaking);
   countup.countColors(data);
 });
 // // TODO: not work
+// go.run(goClassConservative);
 // check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
-//   go.run(goClassConservative);
 //   countup.countColors(data);
 // });
+// TODO: memory leak
+go.run(goClassPrecise);
 check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
-  go.run(goClassPrecise);
   countup.countColors(data);
 });
 check("C, emscripten 3.1.67 (Simple)", () => {

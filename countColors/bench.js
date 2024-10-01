@@ -52,9 +52,9 @@ const goSimpleConservative = await initGoInstance(
 const goSimplePrecise = await initGoInstance(
   "./go-simple/countup-precise.wasm",
 );
-const goClassLeaking = await initGoInstance(
-  "./go-class/countup-leaking.wasm",
-);
+// const goClassLeaking = await initGoInstance(
+//   "./go-class/countup-leaking.wasm",
+// );
 // const goClassConservative = await initGoInstance(
 //   "./go-class/countup-conservative.wasm",
 // );
@@ -121,17 +121,17 @@ Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
-  go.run(goClassLeaking);
-  countup.countColors(data);
-});
-// // TODO: not work
-// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
-//   go.run(goClassConservative);
+// // TODO: memory leak
+// go.run(goClassLeaking);
+// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //   countup.countColors(data);
 // });
+// go.run(goClassConservative);
+// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
+//   countup.countColors(data);
+// });
+// go.run(goClassPrecise);
 // Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
-//   go.run(goClassPrecise);
 //   countup.countColors(data);
 // });
 Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
