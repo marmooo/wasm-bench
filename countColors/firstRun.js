@@ -15,7 +15,7 @@ import initRustVec, {
 import initRustUint32, {
   count_colors as count_colors_uint32,
 } from "./rust-uint32/pkg/countup.js";
-import "./go/wasm_exec.js";
+import "./go-simple/wasm_exec.js";
 import "@kitsonk/xhr";
 import initCSimple from "./c-simple/countup.js";
 import initCStruct from "./c-struct/countup.js";
@@ -43,9 +43,22 @@ const cppSimple = await initCppSimple();
 const cppClass = await initCppClass();
 
 const go = new Go();
-const goConservative = await initGoInstance("./go/countup-conservative.wasm");
-const goLeaking = await initGoInstance("./go/countup-leaking.wasm");
-const goPrecise = await initGoInstance("./go/countup-precise.wasm");
+const goSimpleLeaking = await initGoInstance(
+  "./go-simple/countup-leaking.wasm",
+);
+const goSimpleConservative = await initGoInstance(
+  "./go-simple/countup-conservative.wasm",
+);
+const goSimplePrecise = await initGoInstance(
+  "./go-simple/countup-precise.wasm",
+);
+const goClassLeaking = await initGoInstance(
+  "./go-class/countup-leaking.wasm",
+);
+// const goClassConservative = await initGoInstance(
+//   "./go-class/countup-conservative.wasm",
+// );
+const goClassPrecise = await initGoInstance("./go-class/countup-precise.wasm");
 
 function check(name, callback) {
   console.time(name);
@@ -87,32 +100,45 @@ check("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
 check("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
   count_colors_uint32(data);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative", () => {
-  go.run(goConservative);
-  const { countColors, malloc, memory } = goConservative.exports;
+check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+  go.run(goSimpleLeaking);
+  const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
   const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
   copiedData.set(data);
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking", () => {
-  go.run(goLeaking);
-  const { countColors, malloc, memory } = goLeaking.exports;
+check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+  go.run(goSimpleConservative);
+  const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
   const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
   copiedData.set(data);
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=precise", () => {
-  go.run(goPrecise);
-  const { countColors, malloc, memory } = goPrecise.exports;
+check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
+  go.run(goSimplePrecise);
+  const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
   const copiedData = new Uint8Array(memory.buffer, dataPtr, data.length);
   copiedData.set(data);
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
+});
+check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
+  go.run(goClassLeaking);
+  countup.countColors(data);
+});
+// // TODO: not work
+// check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
+//   go.run(goClassConservative);
+//   countup.countColors(data);
+// });
+check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
+  go.run(goClassPrecise);
+  countup.countColors(data);
 });
 check("C, emscripten 3.1.67 (Simple)", () => {
   const dataPtr = cSimple._malloc(data.length);

@@ -81,11 +81,22 @@ cd ..
 
 # Go
 # https://tinygo.org/docs/reference/usage/important-options/
-cd go
-GOOS=js GOARCH=wasm tinygo build -o countup-conservative.wasm \
-  -opt=s -gc=conservative countup.go
+cd go-simple
 GOOS=js GOARCH=wasm tinygo build -o countup-leaking.wasm \
   -opt=s -gc=leaking countup.go
+GOOS=js GOARCH=wasm tinygo build -o countup-conservative.wasm \
+  -opt=s -gc=conservative countup.go
 GOOS=js GOARCH=wasm tinygo build -o countup-precise.wasm \
   -opt=s -gc=precise countup.go
 cp "$(tinygo env TINYGOROOT)/targets/wasm_exec.js" .
+cd ..
+
+cd go-class
+GOOS=js GOARCH=wasm tinygo build -o countup-leaking.wasm \
+  -opt=s -gc=leaking countup.go
+GOOS=js GOARCH=wasm tinygo build -o countup-conservative.wasm \
+  -opt=s -gc=conservative countup.go
+GOOS=js GOARCH=wasm tinygo build -o countup-precise.wasm \
+  -opt=s -gc=precise countup.go
+cp "$(tinygo env TINYGOROOT)/targets/wasm_exec.js" .
+cd ..
