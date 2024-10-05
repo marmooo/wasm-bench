@@ -23,7 +23,7 @@ await initRustSimple();
 await initRustSerde();
 const cpp = await initCpp();
 
-Deno.test("AssemblyScript 0.27.29 (Number)", () => {
+Deno.test("AssemblyScript 0.27.30 (Number)", () => {
   const colorsAs = getColorsAsNumber(data);
   assertEquals(colorsJs.length, colorsAs.length);
   for (let i = 0; i < colorsJs.length; i++) {
@@ -33,7 +33,7 @@ Deno.test("AssemblyScript 0.27.29 (Number)", () => {
   }
   __collectNumber(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.29 (Class)", () => {
+Deno.test("AssemblyScript 0.27.30 (Class)", () => {
   const colorsAs = getColorsAsClass(data);
   assertEquals(colorsJs.length, colorsAs.length);
   for (let i = 0; i < colorsJs.length; i++) {

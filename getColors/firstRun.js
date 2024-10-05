@@ -10,7 +10,7 @@ function check(name, callback) {
   console.timeEnd(name);
 }
 
-const data = new Uint8Array(2097152);
+const data = new Uint8Array(2 ** 21);
 for (let i = 0; i < data.length; i++) {
   data[i] = Math.floor(Math.random() * 256);
 }
@@ -18,11 +18,11 @@ for (let i = 0; i < data.length; i++) {
 check("JavaScript, Deno 1.46.3", () => {
   getColorsJs(data);
 });
-check("AssemblyScript 0.27.29 (Number)", () => {
+check("AssemblyScript 0.27.30 (Number)", () => {
   getColorsNumber(data);
   __collectNumber(); // --runtime minimal --exportRuntime
 });
-check("AssemblyScript 0.27.29 (Class)", () => {
+check("AssemblyScript 0.27.30 (Class)", () => {
   getColorsClass(data);
   __collectClass(); // --runtime minimal --exportRuntime
 });

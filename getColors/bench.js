@@ -24,11 +24,11 @@ const cpp = await initCpp();
 Deno.bench("JavaScript, Deno 1.46.3", () => {
   getColorsJs(data);
 });
-Deno.bench("AssemblyScript 0.27.29 (Number)", () => {
+Deno.bench("AssemblyScript 0.27.30 (Number)", () => {
   getColorsNumber(data);
   __collectNumber(); // --runtime minimal --exportRuntime
 });
-Deno.bench("AssemblyScript 0.27.29 (Class)", () => {
+Deno.bench("AssemblyScript 0.27.30 (Class)", () => {
   getColorsClass(data);
   __collectClass(); // --runtime minimal --exportRuntime
 });
