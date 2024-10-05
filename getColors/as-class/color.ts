@@ -1,14 +1,18 @@
 class ColorStat {
-  r: number;
-  g: number;
-  b: number;
-  total: number;
+  r: u8;
+  g: u8;
+  b: u8;
+  total: u32;
 
-  constructor(r: number, g: number, b: number, total: number) {
+  constructor(r: u8, g: u8, b: u8, total: u32) {
     this.r = r;
     this.g = g;
     this.b = b;
     this.total = total;
+  }
+
+  toArray(): number[] {
+    return [this.r, this.g, this.b, this.total];
   }
 }
 
@@ -23,17 +27,21 @@ export function countColors(uint8Data: Uint8Array): Uint32Array {
   return colorCount;
 }
 
-export function getColors(uint8Data: Uint8Array): ColorStat[] {
+export function getColors(uint8Data: Uint8Array): number[][] {
   const colorCount = countColors(uint8Data);
   const colors: ColorStat[] = [];
   for (let rgb = 0; rgb < colorCount.length; rgb++) {
     const uses = colorCount[rgb];
     if (uses > 0) {
-      const b = (rgb >> 16) & 0xFF;
-      const g = (rgb >> 8) & 0xFF;
-      const r = rgb & 0xFF;
+      const b = u8((rgb >> 16) & 0xFF);
+      const g = u8((rgb >> 8) & 0xFF);
+      const r = u8(rgb & 0xFF);
       colors.push(new ColorStat(r, g, b, uses));
     }
   }
-  return colors;
+  const result = new Array<number[]>(colors.length);
+  for (let i = 0; i < result.length; i++) {
+    result[i] = colors[i].toArray();
+  }
+  return result;
 }

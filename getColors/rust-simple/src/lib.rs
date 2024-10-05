@@ -1,3 +1,4 @@
+use js_sys::Object;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -34,6 +35,16 @@ impl ColorStat {
     pub fn total(&self) -> u32 {
         self.total
     }
+
+    #[wasm_bindgen]
+    pub fn to_js_value(&self) -> JsValue {
+        let obj = Object::new();
+        js_sys::Reflect::set(&obj, &JsValue::from("r"), &JsValue::from(self.r)).unwrap();
+        js_sys::Reflect::set(&obj, &JsValue::from("g"), &JsValue::from(self.g)).unwrap();
+        js_sys::Reflect::set(&obj, &JsValue::from("b"), &JsValue::from(self.b)).unwrap();
+        js_sys::Reflect::set(&obj, &JsValue::from("total"), &JsValue::from(self.total)).unwrap();
+        JsValue::from(obj)
+    }
 }
 
 pub fn count_colors(uint8_data: &[u8]) -> Vec<u32> {
@@ -49,7 +60,7 @@ pub fn count_colors(uint8_data: &[u8]) -> Vec<u32> {
 }
 
 #[wasm_bindgen]
-pub fn get_colors(uint8_data: &[u8]) -> Vec<ColorStat> {
+pub fn get_colors(uint8_data: &[u8]) -> JsValue {
     let color_count = count_colors(uint8_data);
     let mut colors = Vec::new();
     for (rgb, &uses) in color_count.iter().enumerate() {
@@ -58,8 +69,12 @@ pub fn get_colors(uint8_data: &[u8]) -> Vec<ColorStat> {
             let g = ((rgb >> 8) & 0xFF) as u8;
             let b = ((rgb >> 16) & 0xFF) as u8;
             let color = ColorStat::new(r, g, b, uses);
-            colors.push(color);
+            colors.push(color); // Rust 側の Vec に保存
         }
     }
-    colors
+    let js_array = js_sys::Array::new_with_length(colors.len() as u32);
+    for (i, color) in colors.into_iter().enumerate() {
+        js_array.set(i as u32, color.to_js_value());
+    }
+    js_array.into()
 }

@@ -46,7 +46,7 @@ pub fn count_colors(uint8_data: &[u8]) -> Vec<u32> {
 }
 
 #[wasm_bindgen]
-pub fn get_colors(uint8_data: &[u8]) -> Vec<ColorStat> {
+pub fn get_colors(uint8_data: &[u8]) -> JsValue {
     let color_count = count_colors(uint8_data);
     let mut colors = Vec::new();
     for (rgb, &uses) in color_count.iter().enumerate() {
@@ -63,5 +63,5 @@ pub fn get_colors(uint8_data: &[u8]) -> Vec<ColorStat> {
             colors.push(color);
         }
     }
-    colors
+    serde_wasm_bindgen::to_value(&colors).unwrap()
 }
