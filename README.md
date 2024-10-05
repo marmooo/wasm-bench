@@ -42,7 +42,7 @@ AssemblyScript 0.27.30 (Number)                    286.1 ms           3.5 (233.6
 AssemblyScript 0.27.30 (Class)                     319.3 ms           3.1 (279.6 ms … 370.7 ms) 334.2 ms 370.7 ms 370.7 ms
 Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)             2.2 s           0.5 (   2.2 s …    2.2 s)    2.2 s    2.2 s    2.2 s
 Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)           337.3 ms           3.0 (316.3 ms … 355.4 ms) 351.8 ms 355.4 ms 355.4 ms
-C++, emscripten 3.1.68 (Class)                     390.2 ms           2.6 (368.9 ms … 401.8 ms) 398.0 ms 401.8 ms 401.8 ms
+C++, emscripten 3.1.68                             390.2 ms           2.6 (368.9 ms … 401.8 ms) 398.0 ms 401.8 ms 401.8 ms
 ```
 
 ## Requirements
