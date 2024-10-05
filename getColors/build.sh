@@ -25,3 +25,12 @@ asc color.ts -o color.wasm --bindings esm \
   --runtime minimal --exportRuntime \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
+
+# C++ (Class)
+cd cpp
+emcc color.cpp -o color.js -O3 -flto --closure 1 \
+  --bind \
+  -s MODULARIZE \
+  -s EXPORT_ES6=1 \
+  -s ALLOW_MEMORY_GROWTH=1
+cd ..

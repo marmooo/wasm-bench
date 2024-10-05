@@ -7,16 +7,19 @@ import initRustSimple, {
 import initRustSerde, {
   get_colors as get_colors_serde,
 } from "./rust-serde/pkg/color.js";
+import "@kitsonk/xhr";
+import initCpp from "./cpp/color.js";
 import { __collect as __collectNumber } from "./as-number/color.js";
 import { __collect as __collectClass } from "./as-class/color.js";
 
-const data = new Uint8Array(2097152);
+const data = new Uint8Array(2 ** 21);
 for (let i = 0; i < data.length; i++) {
   data[i] = Math.floor(Math.random() * 256);
 }
 
 await initRustSimple();
 await initRustSerde();
+const cpp = await initCpp();
 
 Deno.bench("JavaScript, Deno 1.46.3", () => {
   getColorsJs(data);
@@ -34,4 +37,7 @@ Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
 });
 Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
   get_colors_serde(data);
+});
+Deno.bench("C++, emscripten 3.1.67 (Class)", () => {
+  cpp.getColors(data);
 });

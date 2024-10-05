@@ -9,6 +9,8 @@ import initRustSerde, {
 } from "./rust-serde/pkg/color.js";
 import { __collect as __collectNumber } from "./as-number/color.js";
 import { __collect as __collectClass } from "./as-class/color.js";
+import "@kitsonk/xhr";
+import initCpp from "./cpp/color.js";
 import { assertEquals } from "@std/assert";
 
 const data = new Uint8Array(16777216);
@@ -19,6 +21,7 @@ const colorsJs = getColorsJs(data);
 
 await initRustSimple();
 await initRustSerde();
+const cpp = await initCpp();
 
 Deno.test("AssemblyScript 0.27.29 (Number)", () => {
   const colorsAs = getColorsAsNumber(data);
@@ -33,12 +36,11 @@ Deno.test("AssemblyScript 0.27.29 (Number)", () => {
 Deno.test("AssemblyScript 0.27.29 (Class)", () => {
   const colorsAs = getColorsAsClass(data);
   assertEquals(colorsJs.length, colorsAs.length);
-  // for (let i = 0; i < colorsJs.length; i++) {
-  //   assertEquals(colorsJs[i][0], colorsAs[i].r);
-  //   assertEquals(colorsJs[i][1], colorsAs[i].g);
-  //   assertEquals(colorsJs[i][2], colorsAs[i].b);
-  //   assertEquals(colorsJs[i][3], colorsAs[i].total);
-  // }
+  for (let i = 0; i < colorsJs.length; i++) {
+    for (let j = 0; j < colorsJs[i].length; j++) {
+      assertEquals(colorsJs[i][j], colorsAs[i][j]);
+    }
+  }
   __collectClass(); // --runtime minimal --exportRuntime
 });
 Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
@@ -59,5 +61,15 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
     assertEquals(colorsJs[i][1], colorsRust[i].g);
     assertEquals(colorsJs[i][2], colorsRust[i].b);
     assertEquals(colorsJs[i][3], colorsRust[i].total);
+  }
+});
+Deno.test("C++, emscripten 3.1.67 (Number)", () => {
+  const colorsCpp = cpp.getColors(data);
+  assertEquals(colorsJs.length, colorsCpp.length);
+  for (let i = 0; i < colorsJs.length; i++) {
+    assertEquals(colorsJs[i][0], colorsCpp[i][0]);
+    assertEquals(colorsJs[i][1], colorsCpp[i][1]);
+    assertEquals(colorsJs[i][2], colorsCpp[i][2]);
+    assertEquals(colorsJs[i][3], colorsCpp[i][3]);
   }
 });
