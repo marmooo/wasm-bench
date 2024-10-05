@@ -63,7 +63,7 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
     assertEquals(colorsJs[i][3], colorsRust[i].total);
   }
 });
-Deno.test("C++, emscripten 3.1.67 (Number)", () => {
+Deno.test("C++, emscripten 3.1.68 (Number)", () => {
   const colorsCpp = cpp.getColors(data);
   assertEquals(colorsJs.length, colorsCpp.length);
   for (let i = 0; i < colorsJs.length; i++) {
