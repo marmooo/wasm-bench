@@ -13,7 +13,7 @@ import "@kitsonk/xhr";
 import initCpp from "./cpp/color.js";
 import { assertEquals } from "@std/assert";
 
-const data = new Uint8Array(16777216);
+const data = new Uint8Array(2 ** 21);
 for (let i = 0; i < data.length; i++) {
   data[i] = Math.floor(Math.random() * 256);
 }
