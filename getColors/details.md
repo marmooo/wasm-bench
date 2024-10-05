@@ -8,7 +8,7 @@ AssemblyScript 0.27.30 (Number): 423ms
 AssemblyScript 0.27.30 (Class): 460ms
 Rust 1.81.0, wasm-bindgen 0.2.93 (Simple): 2276ms
 Rust 1.81.0, wasm-bindgen 0.2.93 (Serde): 450ms
-C++, emscripten 3.1.68 (Class): 515ms
+C++, emscripten 3.1.68: 515ms
 ```
 
 ## Size

@@ -18,7 +18,6 @@ asc color.ts -o color.wasm --bindings esm \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
 
-# TODO: not work
 # AssemblyScript (Class)
 cd as-class
 asc color.ts -o color.wasm --bindings esm \
@@ -26,7 +25,7 @@ asc color.ts -o color.wasm --bindings esm \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
 
-# C++ (Class)
+# C++
 cd cpp
 emcc color.cpp -o color.js -O3 -flto --closure 1 \
   --bind \

@@ -44,6 +44,6 @@ check("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
 check("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
   get_colors_serde(data);
 });
-check("C++, emscripten 3.1.68 (Class)", () => {
+check("C++, emscripten 3.1.68", () => {
   cpp.getColors(data);
 });
