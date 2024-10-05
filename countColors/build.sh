@@ -16,6 +16,11 @@ cd rust-vec
 wasm-pack build --target web --release
 cd ..
 
+# Rust (Vec)
+cd rust-uint32
+wasm-pack build --target web --release
+cd ..
+
 # AssemblyScript (wrap)
 cd as-wrap
 asc countup.ts -o countup.wasm --bindings esm \
