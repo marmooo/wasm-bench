@@ -45,6 +45,20 @@ Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)           337.3 ms           3.0 (316.3
 C++, emscripten 3.1.68                             390.2 ms           2.6 (368.9 ms … 401.8 ms) 398.0 ms 401.8 ms 401.8 ms
 ```
 
+### initColors ([details](initColors/details.md))
+
+```
+    CPU | Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz
+Runtime | Deno 1.46.3 (x86_64-unknown-linux-gnu)
+
+benchmark                          time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+---------------------------------- ----------------------------- --------------------- --------------------------
+JavaScript, Deno 1.46.3                   188.9 ms           5.3 (173.5 ms … 213.0 ms) 194.7 ms 213.0 ms 213.0 ms
+AssemblyScript 0.27.30                    148.8 ms           6.7 (123.7 ms … 187.2 ms) 160.3 ms 187.2 ms 187.2 ms
+Rust 1.81.0, wasm-bindgen 0.2.93           70.3 ms          14.2 ( 63.0 ms … 104.4 ms)  74.9 ms 104.4 ms 104.4 ms
+C++, emscripten 3.1.68                     43.7 ms          22.9 ( 42.4 ms …  48.8 ms)  44.0 ms  48.8 ms  48.8 ms
+```
+
 ## Requirements
 
 - [Deno](https://github.com/denoland/deno)
