@@ -25,6 +25,12 @@ asc color.ts -o color.wasm --bindings esm \
   -O3 --converge --noAssert --uncheckedBehavior always
 cd ..
 
+# C/C++ useful options
+# https://emscripten.org/docs/optimizing/Optimizing-Code.html
+# -s DISABLE_EXCEPTION_CATCHING=0
+#   printf() --> console.log()
+#   std::cout --> console.log()
+
 # C++
 cd cpp
 emcc color.cpp -o color.js -O3 -flto --closure 1 \
