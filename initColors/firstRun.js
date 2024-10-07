@@ -3,7 +3,7 @@ import {
   __collect as __collectAs,
   Quantizer as QuantizerAs,
 } from "./as/init.js";
-import initRust, { Quantizer as QuantizerRust } from "./rust/pkg/color.js";
+import initRust, { Quantizer as QuantizerRust } from "./rust/pkg/init.js";
 import "@kitsonk/xhr";
 import initCpp from "./cpp/init.js";
 

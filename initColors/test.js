@@ -5,7 +5,7 @@ import {
   getColorCount as getColorCountAs,
   Quantizer as QuantizerAs,
 } from "./as/init.js";
-import initRust, { Quantizer as QuantizerRust } from "./rust/pkg/color.js";
+import initRust, { Quantizer as QuantizerRust } from "./rust/pkg/init.js";
 import "@kitsonk/xhr";
 import initCpp from "./cpp/init.js";
 import { assertEquals } from "@std/assert";
