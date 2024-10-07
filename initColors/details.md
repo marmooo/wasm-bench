@@ -13,7 +13,6 @@ C++, emscripten 3.1.68: 114ms
 
 ```
 as/init.wasm 5538
-cpp-old/init.wasm 16267
 cpp/init.wasm 16654
-rust/pkg/color_bg.wasm 10795
+rust/pkg/init_bg.wasm 10729
 ```

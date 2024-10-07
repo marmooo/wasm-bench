@@ -1,5 +1,5 @@
 [package]
-name = "color"
+name = "init"
 version = "0.0.1"
 authors = ["marmooo"]
 description = "A sample project with wasm-pack"
