@@ -38,13 +38,13 @@ public:
   std::vector<ColorStat> getColors() {
     std::vector<uint32_t> colorCount = countColors();
     std::vector<ColorStat> colors;
-    for (uint32_t rgb = 0; rgb < colorCount.size(); rgb++) {
+    for (size_t rgb = 0; rgb < colorCount.size(); rgb++) {
       uint32_t uses = colorCount[rgb];
       if (uses > 0) {
         uint8_t r = (rgb >> 16) & 0xFF;
         uint8_t g = (rgb >> 8) & 0xFF;
         uint8_t b = rgb & 0xFF;
-        colors.push_back({r, g, b, static_cast<uint32_t>(uses)});
+        colors.emplace_back(ColorStat{r, g, b, uses});
       }
     }
     return colors;
