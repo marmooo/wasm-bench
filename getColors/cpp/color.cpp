@@ -22,7 +22,7 @@ vector<uint32_t> countColors(const val &uint8Data) {
 /* emscripten::val getColors(const val &uint8Data) { */
 /*   vector<uint32_t> colorCount = countColors(uint8Data); */
 /*   std::vector<val> colors; */
-/*   for (uint32_t rgb = 0; rgb < colorCount.size(); rgb++) { */
+/*   for (size_t rgb = 0; rgb < colorCount.size(); rgb++) { */
 /*     uint32_t uses = colorCount[rgb]; */
 /*     if (uses > 0) { */
 /*       uint8_t b = (rgb >> 16) & 0xFF; */
@@ -38,7 +38,7 @@ vector<uint32_t> countColors(const val &uint8Data) {
 emscripten::val getColors(const val &uint8Data) {
   vector<uint32_t> colorCount = countColors(uint8Data);
   vector<vector<uint32_t>> colors;
-  for (uint32_t rgb = 0; rgb < colorCount.size(); rgb++) {
+  for (size_t rgb = 0; rgb < colorCount.size(); rgb++) {
     uint32_t uses = colorCount[rgb];
     if (uses > 0) {
       uint8_t b = (rgb >> 16) & 0xFF;
