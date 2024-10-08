@@ -1,8 +1,8 @@
-#include <vector>
 #include <array>
 #include <cstdint>
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
+#include <vector>
 using namespace emscripten;
 using namespace std;
 
@@ -28,7 +28,7 @@ vector<uint32_t> countColors(const val &uint8Data) {
 /*       uint8_t b = (rgb >> 16) & 0xFF; */
 /*       uint8_t g = (rgb >> 8) & 0xFF; */
 /*       uint8_t r = rgb & 0xFF; */
-/*       std::vector<val> color = { val(r), val(g), val(b), val(uses) }; */
+/*       std::vector<val> color = {val(r), val(g), val(b), val(uses)}; */
 /*       colors.push_back(val::array(color)); */
 /*     } */
 /*   } */
@@ -49,7 +49,7 @@ emscripten::val getColors(const val &uint8Data) {
   }
   std::vector<val> result;
   result.reserve(colors.size());
-  for (const auto& color : colors) {
+  for (const auto &color : colors) {
     result.push_back(val::array(color));
   }
   return val::array(result);
