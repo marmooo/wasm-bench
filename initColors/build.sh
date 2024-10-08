@@ -21,8 +21,8 @@ cd ..
 
 # C++
 cd cpp
-emcc init.cpp -o init.js -O3 -flto --closure 1 \
-  --bind \
+emcc init.cpp -o init.js --bind \
+  -O3 -flto -funroll-loops --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1
