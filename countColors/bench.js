@@ -94,7 +94,7 @@ Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
 Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
   count_colors_uint32(data);
 });
-Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   go.run(goSimpleLeaking);
   const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
@@ -103,7 +103,7 @@ Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   go.run(goSimpleConservative);
   const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
@@ -112,7 +112,7 @@ Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
+Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
   go.run(goSimplePrecise);
   const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
@@ -123,15 +123,15 @@ Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
 });
 // // TODO: memory leak
 // go.run(goClassLeaking);
-// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
+// Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //   countup.countColors(data);
 // });
 // go.run(goClassConservative);
-// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
+// Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Class)", () => {
 //   countup.countColors(data);
 // });
 // go.run(goClassPrecise);
-// Deno.bench("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
+// Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
 //   countup.countColors(data);
 // });
 Deno.bench("C, emscripten 3.1.67 (Simple)", () => {

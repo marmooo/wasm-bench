@@ -100,7 +100,7 @@ check("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
 check("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
   count_colors_uint32(data);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+check("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   go.run(goSimpleLeaking);
   const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
@@ -109,7 +109,7 @@ check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+check("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   go.run(goSimpleConservative);
   const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
@@ -118,7 +118,7 @@ check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
+check("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
   go.run(goSimplePrecise);
   const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
@@ -129,7 +129,7 @@ check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
 });
 // TODO: memory leak
 go.run(goClassLeaking);
-check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
+check("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
   countup.countColors(data);
 });
 // // TODO: not work
@@ -139,7 +139,7 @@ check("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
 // });
 // TODO: memory leak
 go.run(goClassPrecise);
-check("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
+check("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
   countup.countColors(data);
 });
 check("C, emscripten 3.1.67 (Simple)", () => {

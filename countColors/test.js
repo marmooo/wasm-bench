@@ -123,7 +123,7 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
     assertEquals(countJs[i], countRust[i]);
   }
 });
-Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   go.run(goSimpleConservative);
   const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
@@ -136,7 +136,7 @@ Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   go.run(goSimpleLeaking);
   const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
@@ -149,7 +149,7 @@ Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
+Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
   go.run(goSimplePrecise);
   const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
@@ -162,7 +162,7 @@ Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
+Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
   go.run(goClassLeaking);
   const countGo = countup.countColors(data);
   assertEquals(countJs.length, countGo.length);
@@ -171,7 +171,7 @@ Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
   }
 });
 // // TODO: not work
-// Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
+// Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Class)", () => {
 //   go.run(goClassConservative);
 //   const countGo = countup.countColors(data);
 //   assertEquals(countJs.length, countGo.length);
@@ -179,7 +179,7 @@ Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //     assertEquals(countJs[i], countGo[i]);
 //   }
 // });
-// Deno.test("Go, 1.23.1, TinyGo 0.33.0 GC=precise (Class)", () => {
+// Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
 //   go.run(goClassPrecise);
 //   const countGo = countup.countColors(data);
 //   assertEquals(countJs.length, countGo.length);
