@@ -187,7 +187,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //     assertEquals(countJs[i], countGo[i]);
 //   }
 // });
-Deno.test("C, emscripten 3.1.67 (Simple)", () => {
+Deno.test("C, emscripten 3.1.68 (Simple)", () => {
   const dataPtr = cSimple._malloc(data.length);
   cSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cSimple._countColors(dataPtr, data.length);
@@ -199,7 +199,7 @@ Deno.test("C, emscripten 3.1.67 (Simple)", () => {
   cSimple._free(dataPtr);
   cSimple._free(resultPtr);
 });
-Deno.test("C, emscripten 3.1.67 (Struct)", () => {
+Deno.test("C, emscripten 3.1.68 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
@@ -212,7 +212,7 @@ Deno.test("C, emscripten 3.1.67 (Struct)", () => {
   cStruct._free(resultPtr);
   cStruct._free(colorCountPtr);
 });
-Deno.test("C++, emscripten 3.1.67 (Simple)", () => {
+Deno.test("C++, emscripten 3.1.68 (Simple)", () => {
   const dataPtr = cppSimple._malloc(data.length);
   cppSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cppSimple._countColors(dataPtr, data.length);
@@ -228,7 +228,7 @@ Deno.test("C++, emscripten 3.1.67 (Simple)", () => {
   cppSimple._free(dataPtr);
   cppSimple._free(resultPtr);
 });
-Deno.test("C++, emscripten 3.1.67 (Class)", () => {
+Deno.test("C++, emscripten 3.1.68 (Class)", () => {
   const countCpp = cppClass.countColors(data);
   assertEquals(countJs.length, countCpp.length);
   for (let i = 0; i < countJs.length; i++) {

@@ -150,14 +150,14 @@ check("C, emscripten 3.1.67 (Simple)", () => {
   cSimple._free(dataPtr);
   cSimple._free(resultPtr);
 });
-check("C, emscripten 3.1.67 (Struct)", () => {
+check("C, emscripten 3.1.68 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   createTypedArray(cStruct, resultPtr, Uint32Array);
   freeStruct(cStruct, dataPtr);
   freeStruct(cStruct, resultPtr);
 });
-check("C++, emscripten 3.1.67 (Simple)", () => {
+check("C++, emscripten 3.1.68 (Simple)", () => {
   const dataPtr = cppSimple._malloc(data.length);
   cppSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cppSimple._countColors(dataPtr, data.length);
@@ -165,6 +165,6 @@ check("C++, emscripten 3.1.67 (Simple)", () => {
   cppSimple._free(dataPtr);
   cppSimple._free(resultPtr);
 });
-check("C++, emscripten 3.1.67 (Class)", () => {
+check("C++, emscripten 3.1.68 (Class)", () => {
   cppClass.countColors(data);
 });

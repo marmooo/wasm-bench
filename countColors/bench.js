@@ -134,7 +134,7 @@ Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
 // Deno.bench("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
 //   countup.countColors(data);
 // });
-Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
+Deno.bench("C, emscripten 3.1.68 (Simple)", () => {
   const dataPtr = cSimple._malloc(data.length);
   cSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cSimple._countColors(dataPtr, data.length);
@@ -142,14 +142,14 @@ Deno.bench("C, emscripten 3.1.67 (Simple)", () => {
   cSimple._free(dataPtr);
   cSimple._free(resultPtr);
 });
-Deno.bench("C, emscripten 3.1.67 (Struct)", () => {
+Deno.bench("C, emscripten 3.1.68 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   createTypedArray(cStruct, resultPtr, Uint32Array);
   freeStruct(cStruct, dataPtr);
   freeStruct(cStruct, resultPtr);
 });
-Deno.bench("C++, emscripten 3.1.67 (Simple)", () => {
+Deno.bench("C++, emscripten 3.1.68 (Simple)", () => {
   const dataPtr = cppSimple._malloc(data.length);
   cppSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cppSimple._countColors(dataPtr, data.length);
@@ -157,6 +157,6 @@ Deno.bench("C++, emscripten 3.1.67 (Simple)", () => {
   cppSimple._free(dataPtr);
   cppSimple._free(resultPtr);
 });
-Deno.bench("C++, emscripten 3.1.67 (Class)", () => {
+Deno.bench("C++, emscripten 3.1.68 (Class)", () => {
   cppClass.countColors(data);
 });
