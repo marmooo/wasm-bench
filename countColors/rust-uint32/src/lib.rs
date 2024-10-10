@@ -11,5 +11,5 @@ pub fn count_colors(uint8_data: &[u8]) -> Uint32Array {
         let rgb = rgba & 0xFFFFFF;
         color_count[rgb as usize] += 1;
     }
-    return Uint32Array::from(&color_count[..]);
+    unsafe { Uint32Array::view(&color_count) }
 }
