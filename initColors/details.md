@@ -3,16 +3,16 @@
 ## First Run
 
 ```
-JavaScript, Deno 1.46.3: 219ms
-AssemblyScript 0.27.30: 156ms
-Rust 1.81.0, wasm-bindgen 0.2.93: 195ms
-C++, emscripten 3.1.68: 114ms
+JavaScript, Deno 2.1.5: 197ms
+AssemblyScript 0.27.31: 158ms
+Rust 1.84.0, wasm-bindgen 0.2.99: 189ms
+C++, emscripten 3.1.74: 124ms
 ```
 
 ## Size
 
 ```
 as/init.wasm 5538
-cpp/init.wasm 16654
-rust/pkg/init_bg.wasm 10729
+cpp/init.wasm 16511
+rust/pkg/init_bg.wasm 12521
 ```

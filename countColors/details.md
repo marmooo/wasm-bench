@@ -3,23 +3,23 @@
 ## First Run
 
 ```
-JavaScript, Deno 1.46.3: 152ms
-AssemblyScript 0.27.30 (Wrap): 334ms
-AssemblyScript 0.27.30 (Shift): 321ms
-AssemblyScript 0.27.30 (DataView): 327ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer): 226ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Box): 296ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Vec): 301ms
-Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32): 230ms
-Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple): 236ms
-Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple): 29263ms
-Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple): 312ms
-Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class): 3148ms
-Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class): 3602ms
-C, emscripten 3.1.67 (Simple): 176ms
-C, emscripten 3.1.68 (Struct): 186ms
-C++, emscripten 3.1.68 (Simple): 186ms
-C++, emscripten 3.1.68 (Class): 186ms
+JavaScript, Deno 2.1.5: 155ms
+AssemblyScript 0.27.31 (Wrap): 321ms
+AssemblyScript 0.27.31 (Shift): 325ms
+AssemblyScript 0.27.31 (DataView): 323ms
+Rust 1.84.0, wasm-bindgen 0.2.99 (Pointer): 211ms
+Rust 1.84.0, wasm-bindgen 0.2.99 (Box): 272ms
+Rust 1.84.0, wasm-bindgen 0.2.99 (Vec): 280ms
+Rust 1.84.0, wasm-bindgen 0.2.99 (Uint32): 276ms
+Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Simple): 225ms
+Go, 1.23.4, TinyGo 0.35.0 GC=conservative (Simple): 29834ms
+Go, 1.23.4, TinyGo 0.35.0 GC=precise (Simple): 302ms
+Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Class): 3104ms
+Go, 1.23.4, TinyGo 0.35.0 GC=precise (Class): 4156ms
+C, emscripten 3.1.74 (Simple): 177ms
+C, emscripten 3.1.74 (Struct): 185ms
+C++, emscripten 3.1.74 (Simple): 186ms
+C++, emscripten 3.1.74 (Class): 187ms
 ```
 
 ## Size
@@ -28,18 +28,18 @@ C++, emscripten 3.1.68 (Class): 186ms
 as-dataview/countup.wasm 3862
 as-shift/countup.wasm 3522
 as-wrap/countup.wasm 3799
-c-simple/countup.wasm 7607
-c-struct/countup.wasm 7658
-cpp-class/countup.wasm 14210
-cpp-simple/countup.wasm 12173
-go-class/countup-conservative.wasm 156054
-go-class/countup-leaking.wasm 138397
-go-class/countup-precise.wasm 157669
-go-simple/countup-conservative.wasm 90488
-go-simple/countup-leaking.wasm 74292
-go-simple/countup-precise.wasm 91879
-rust-box/pkg/countup_bg.wasm 8242
-rust-pointer/pkg/countup_bg.wasm 8172
-rust-uint32/pkg/countup_bg.wasm 10047
-rust-vec/pkg/countup_bg.wasm 8241
+c-simple/countup.wasm 7602
+c-struct/countup.wasm 7653
+cpp-class/countup.wasm 14089
+cpp-simple/countup.wasm 12057
+go-class/countup-conservative.wasm 175302
+go-class/countup-leaking.wasm 157113
+go-class/countup-precise.wasm 176911
+go-simple/countup-conservative.wasm 109892
+go-simple/countup-leaking.wasm 93169
+go-simple/countup-precise.wasm 111309
+rust-box/pkg/countup_bg.wasm 9410
+rust-pointer/pkg/countup_bg.wasm 9343
+rust-uint32/pkg/countup_bg.wasm 12639
+rust-vec/pkg/countup_bg.wasm 9422
 ```
