@@ -21,23 +21,23 @@ await initRustSimple();
 await initRustSerde();
 const cpp = await initCpp();
 
-Deno.bench("JavaScript, Deno 1.46.3", () => {
+Deno.bench("JavaScript, Deno 2.1.5", () => {
   getColorsJs(data);
 });
-Deno.bench("AssemblyScript 0.27.30 (Number)", () => {
+Deno.bench("AssemblyScript 0.27.31 (Number)", () => {
   getColorsNumber(data);
   __collectNumber(); // --runtime minimal --exportRuntime
 });
-Deno.bench("AssemblyScript 0.27.30 (Class)", () => {
+Deno.bench("AssemblyScript 0.27.31 (Class)", () => {
   getColorsClass(data);
   __collectClass(); // --runtime minimal --exportRuntime
 });
-Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
+Deno.bench("Rust 1.84.0, wasm-bindgen 0.2.99 (Simple)", () => {
   get_colors_simple(data);
 });
-Deno.bench("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
+Deno.bench("Rust 1.84.0, wasm-bindgen 0.2.99 (Serde)", () => {
   get_colors_serde(data);
 });
-Deno.bench("C++, emscripten 3.1.68", () => {
+Deno.bench("C++, emscripten 3.1.74", () => {
   cpp.getColors(data);
 });

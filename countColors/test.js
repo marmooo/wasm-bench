@@ -65,7 +65,7 @@ for (let i = 0; i < data.length; i++) {
 }
 const countJs = countColorsJs(data);
 
-Deno.test("AssemblyScript 0.27.30 (Wrap)", () => {
+Deno.test("AssemblyScript 0.27.31 (Wrap)", () => {
   const countAs = countColorsAsWrap(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {
@@ -73,7 +73,7 @@ Deno.test("AssemblyScript 0.27.30 (Wrap)", () => {
   }
   __collectWrap(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.30 (Shift)", () => {
+Deno.test("AssemblyScript 0.27.31 (Shift)", () => {
   const countAs = countColorsAsShift(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {
@@ -81,7 +81,7 @@ Deno.test("AssemblyScript 0.27.30 (Shift)", () => {
   }
   __collectShift(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.30 (DataView)", () => {
+Deno.test("AssemblyScript 0.27.31 (DataView)", () => {
   const countAs = countColorsAsDataView(data);
   assertEquals(countJs.length, countAs.length);
   for (let i = 0; i < countJs.length; i++) {
@@ -89,7 +89,7 @@ Deno.test("AssemblyScript 0.27.30 (DataView)", () => {
   }
   __collectDataView(); // --runtime minimal --exportRuntime
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Pointer)", () => {
   const resultPtr = count_colors_pointer(data);
   const countRust = new Uint32Array(
     rustPointer.memory.buffer,
@@ -102,28 +102,28 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)", () => {
   }
   free_pointer(resultPtr, 16777216);
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Box)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Box)", () => {
   const countRust = count_colors_box(data);
   assertEquals(countJs.length, countRust.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countRust[i]);
   }
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Vec)", () => {
   const countRust = count_colors_vec(data);
   assertEquals(countJs.length, countRust.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countRust[i]);
   }
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Uint32)", () => {
   const countRust = count_colors_uint32(data);
   assertEquals(countJs.length, countRust.length);
   for (let i = 0; i < countJs.length; i++) {
     assertEquals(countJs[i], countRust[i]);
   }
 });
-Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=conservative (Simple)", () => {
   go.run(goSimpleConservative);
   const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
@@ -136,7 +136,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Simple)", () => {
   go.run(goSimpleLeaking);
   const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
@@ -149,7 +149,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
+Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=precise (Simple)", () => {
   go.run(goSimplePrecise);
   const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
@@ -162,7 +162,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
     assertEquals(countJs[i], countGo[i]);
   }
 });
-Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
+Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Class)", () => {
   go.run(goClassLeaking);
   const countGo = countup.countColors(data);
   assertEquals(countJs.length, countGo.length);
@@ -171,7 +171,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
   }
 });
 // // TODO: not work
-// Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Class)", () => {
+// Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=conservative (Class)", () => {
 //   go.run(goClassConservative);
 //   const countGo = countup.countColors(data);
 //   assertEquals(countJs.length, countGo.length);
@@ -179,7 +179,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //     assertEquals(countJs[i], countGo[i]);
 //   }
 // });
-// Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
+// Deno.test("Go, 1.23.4, TinyGo 0.35.0 GC=precise (Class)", () => {
 //   go.run(goClassPrecise);
 //   const countGo = countup.countColors(data);
 //   assertEquals(countJs.length, countGo.length);
@@ -187,7 +187,7 @@ Deno.test("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
 //     assertEquals(countJs[i], countGo[i]);
 //   }
 // });
-Deno.test("C, emscripten 3.1.68 (Simple)", () => {
+Deno.test("C, emscripten 3.1.74 (Simple)", () => {
   const dataPtr = cSimple._malloc(data.length);
   cSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cSimple._countColors(dataPtr, data.length);
@@ -199,7 +199,7 @@ Deno.test("C, emscripten 3.1.68 (Simple)", () => {
   cSimple._free(dataPtr);
   cSimple._free(resultPtr);
 });
-Deno.test("C, emscripten 3.1.68 (Struct)", () => {
+Deno.test("C, emscripten 3.1.74 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   const colorCountPtr = cStruct.HEAP32[resultPtr / 4];
@@ -212,7 +212,7 @@ Deno.test("C, emscripten 3.1.68 (Struct)", () => {
   cStruct._free(resultPtr);
   cStruct._free(colorCountPtr);
 });
-Deno.test("C++, emscripten 3.1.68 (Simple)", () => {
+Deno.test("C++, emscripten 3.1.74 (Simple)", () => {
   const dataPtr = cppSimple._malloc(data.length);
   cppSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cppSimple._countColors(dataPtr, data.length);
@@ -228,7 +228,7 @@ Deno.test("C++, emscripten 3.1.68 (Simple)", () => {
   cppSimple._free(dataPtr);
   cppSimple._free(resultPtr);
 });
-Deno.test("C++, emscripten 3.1.68 (Class)", () => {
+Deno.test("C++, emscripten 3.1.74 (Class)", () => {
   const countCpp = cppClass.countColors(data);
   assertEquals(countJs.length, countCpp.length);
   for (let i = 0; i < countJs.length; i++) {

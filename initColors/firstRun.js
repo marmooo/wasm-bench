@@ -21,16 +21,16 @@ for (let i = 0; i < data.length; i++) {
 await initRust();
 const cpp = await initCpp();
 
-check("JavaScript, Deno 1.46.3", () => {
+check("JavaScript, Deno 2.1.5", () => {
   new QuantizerJs(data, 1024, 1024);
 });
-check("AssemblyScript 0.27.30", () => {
+check("AssemblyScript 0.27.31", () => {
   QuantizerAs(data, 1024, 1024);
   __collectAs(); // --runtime minimal --exportRuntime
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
+check("Rust 1.84.0, wasm-bindgen 0.2.99", () => {
   new QuantizerRust(data, 1024, 1024);
 });
-check("C++, emscripten 3.1.68", () => {
+check("C++, emscripten 3.1.74", () => {
   new cpp.Quantizer(data, 1024, 1024);
 });

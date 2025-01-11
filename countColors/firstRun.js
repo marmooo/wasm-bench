@@ -71,36 +71,36 @@ for (let i = 0; i < data.length; i++) {
   data[i] = Math.floor(Math.random() * 256);
 }
 
-check("JavaScript, Deno 1.46.3", () => {
+check("JavaScript, Deno 2.1.5", () => {
   countColorsJs(data);
 });
-check("AssemblyScript 0.27.30 (Wrap)", () => {
+check("AssemblyScript 0.27.31 (Wrap)", () => {
   countColorsAsWrap(data);
   __collectWrap(); // --runtime minimal --exportRuntime
 });
-check("AssemblyScript 0.27.30 (Shift)", () => {
+check("AssemblyScript 0.27.31 (Shift)", () => {
   countColorsAsShift(data);
   __collectShift(); // --runtime minimal --exportRuntime
 });
-check("AssemblyScript 0.27.30 (DataView)", () => {
+check("AssemblyScript 0.27.31 (DataView)", () => {
   countColorsAsDataView(data);
   __collectDataView(); // --runtime minimal --exportRuntime
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93 (Pointer)", () => {
+check("Rust 1.84.0, wasm-bindgen 0.2.99 (Pointer)", () => {
   const resultPtr = count_colors_pointer(data);
   new Uint32Array(rustPointer.memory.buffer, resultPtr, 16777216);
   free_pointer(resultPtr, 16777216);
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93 (Box)", () => {
+check("Rust 1.84.0, wasm-bindgen 0.2.99 (Box)", () => {
   count_colors_box(data);
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93 (Vec)", () => {
+check("Rust 1.84.0, wasm-bindgen 0.2.99 (Vec)", () => {
   count_colors_vec(data);
 });
-check("Rust 1.81.0, wasm-bindgen 0.2.93 (Uint32)", () => {
+check("Rust 1.84.0, wasm-bindgen 0.2.99 (Uint32)", () => {
   count_colors_uint32(data);
 });
-check("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
+check("Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Simple)", () => {
   go.run(goSimpleLeaking);
   const { countColors, malloc, memory } = goSimpleLeaking.exports;
   const dataPtr = malloc(data.length);
@@ -109,7 +109,7 @@ check("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
+check("Go, 1.23.4, TinyGo 0.35.0 GC=conservative (Simple)", () => {
   go.run(goSimpleConservative);
   const { countColors, malloc, memory } = goSimpleConservative.exports;
   const dataPtr = malloc(data.length);
@@ -118,7 +118,7 @@ check("Go, 1.23.2, TinyGo 0.33.0 GC=conservative (Simple)", () => {
   const resultPtr = countColors(dataPtr, data.length);
   new Uint32Array(memory.buffer, resultPtr, 16777216);
 });
-check("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
+check("Go, 1.23.4, TinyGo 0.35.0 GC=precise (Simple)", () => {
   go.run(goSimplePrecise);
   const { countColors, malloc, memory } = goSimplePrecise.exports;
   const dataPtr = malloc(data.length);
@@ -129,20 +129,20 @@ check("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Simple)", () => {
 });
 // TODO: memory leak
 go.run(goClassLeaking);
-check("Go, 1.23.2, TinyGo 0.33.0 GC=leaking (Class)", () => {
+check("Go, 1.23.4, TinyGo 0.35.0 GC=leaking (Class)", () => {
   countup.countColors(data);
 });
 // // TODO: not work
 // go.run(goClassConservative);
-// check("Go, 1.23.1, TinyGo 0.33.0 GC=conservative (Class)", () => {
+// check("Go, 1.23.4, TinyGo 0.35.0 GC=conservative (Class)", () => {
 //   countup.countColors(data);
 // });
 // TODO: memory leak
 go.run(goClassPrecise);
-check("Go, 1.23.2, TinyGo 0.33.0 GC=precise (Class)", () => {
+check("Go, 1.23.4, TinyGo 0.35.0 GC=precise (Class)", () => {
   countup.countColors(data);
 });
-check("C, emscripten 3.1.67 (Simple)", () => {
+check("C, emscripten 3.1.74 (Simple)", () => {
   const dataPtr = cSimple._malloc(data.length);
   cSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cSimple._countColors(dataPtr, data.length);
@@ -150,14 +150,14 @@ check("C, emscripten 3.1.67 (Simple)", () => {
   cSimple._free(dataPtr);
   cSimple._free(resultPtr);
 });
-check("C, emscripten 3.1.68 (Struct)", () => {
+check("C, emscripten 3.1.74 (Struct)", () => {
   const dataPtr = createStruct(cStruct, data);
   const resultPtr = cStruct._countColors(dataPtr);
   createTypedArray(cStruct, resultPtr, Uint32Array);
   freeStruct(cStruct, dataPtr);
   freeStruct(cStruct, resultPtr);
 });
-check("C++, emscripten 3.1.68 (Simple)", () => {
+check("C++, emscripten 3.1.74 (Simple)", () => {
   const dataPtr = cppSimple._malloc(data.length);
   cppSimple.HEAPU8.set(data, dataPtr);
   const resultPtr = cppSimple._countColors(dataPtr, data.length);
@@ -165,6 +165,6 @@ check("C++, emscripten 3.1.68 (Simple)", () => {
   cppSimple._free(dataPtr);
   cppSimple._free(resultPtr);
 });
-check("C++, emscripten 3.1.68 (Class)", () => {
+check("C++, emscripten 3.1.74 (Class)", () => {
   cppClass.countColors(data);
 });

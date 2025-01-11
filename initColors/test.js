@@ -19,18 +19,18 @@ const quantizerJs = new QuantizerJs(data, 1024, 1024);
 await initRust();
 const cpp = await initCpp();
 
-Deno.test("AssemblyScript 0.27.30", () => {
+Deno.test("AssemblyScript 0.27.31", () => {
   const quantizer = QuantizerAs(data, 1024, 1024);
   assertEquals(quantizerJs.getBitCount(), getBitCountAs(quantizer));
   assertEquals(quantizerJs.getColorCount(), getColorCountAs(quantizer));
   __collectAs(); // --runtime minimal --exportRuntime
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99", () => {
   const quantizer = new QuantizerRust(data, 1024, 1024);
   assertEquals(quantizerJs.getBitCount(), quantizer.get_bit_count());
   assertEquals(quantizerJs.getColorCount(), quantizer.get_color_count());
 });
-Deno.test("C++, emscripten 3.1.68", () => {
+Deno.test("C++, emscripten 3.1.74", () => {
   const quantizer = new cpp.Quantizer(data, 1024, 1024);
   assertEquals(quantizerJs.getBitCount(), quantizer.getBitCount());
   assertEquals(quantizerJs.getColorCount(), quantizer.getColorCount());

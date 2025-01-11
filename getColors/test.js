@@ -23,7 +23,7 @@ await initRustSimple();
 await initRustSerde();
 const cpp = await initCpp();
 
-Deno.test("AssemblyScript 0.27.30 (Number)", () => {
+Deno.test("AssemblyScript 0.27.31 (Number)", () => {
   const colorsAs = getColorsAsNumber(data);
   assertEquals(colorsJs.length, colorsAs.length);
   for (let i = 0; i < colorsJs.length; i++) {
@@ -33,7 +33,7 @@ Deno.test("AssemblyScript 0.27.30 (Number)", () => {
   }
   __collectNumber(); // --runtime minimal --exportRuntime
 });
-Deno.test("AssemblyScript 0.27.30 (Class)", () => {
+Deno.test("AssemblyScript 0.27.31 (Class)", () => {
   const colorsAs = getColorsAsClass(data);
   assertEquals(colorsJs.length, colorsAs.length);
   for (let i = 0; i < colorsJs.length; i++) {
@@ -43,7 +43,7 @@ Deno.test("AssemblyScript 0.27.30 (Class)", () => {
   }
   __collectClass(); // --runtime minimal --exportRuntime
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Simple)", () => {
   const colorsRust = get_colors_simple(data);
   assertEquals(colorsJs.length, colorsRust.length);
   for (let i = 0; i < colorsJs.length; i++) {
@@ -53,7 +53,7 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Simple)", () => {
     assertEquals(colorsJs[i][3], colorsRust[i].total);
   }
 });
-Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
+Deno.test("Rust 1.84.0, wasm-bindgen 0.2.99 (Serde)", () => {
   const colorsRust = get_colors_serde(data);
   assertEquals(colorsJs.length, colorsRust.length);
   for (let i = 0; i < colorsJs.length; i++) {
@@ -63,7 +63,7 @@ Deno.test("Rust 1.81.0, wasm-bindgen 0.2.93 (Serde)", () => {
     assertEquals(colorsJs[i][3], colorsRust[i].total);
   }
 });
-Deno.test("C++, emscripten 3.1.68", () => {
+Deno.test("C++, emscripten 3.1.74", () => {
   const colorsCpp = cpp.getColors(data);
   assertEquals(colorsJs.length, colorsCpp.length);
   for (let i = 0; i < colorsJs.length; i++) {
