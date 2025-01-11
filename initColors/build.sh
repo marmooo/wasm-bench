@@ -3,6 +3,7 @@
 
 # Rust
 cd rust
+cargo update
 wasm-pack build --target web --release
 cd ..
 

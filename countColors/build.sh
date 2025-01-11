@@ -3,21 +3,25 @@
 
 # Rust (Pointer)
 cd rust-pointer
+cargo update
 wasm-pack build --target web --release
 cd ..
 
 # Rust (Box)
 cd rust-box
+cargo update
 wasm-pack build --target web --release
 cd ..
 
 # Rust (Vec)
 cd rust-vec
+cargo update
 wasm-pack build --target web --release
 cd ..
 
 # Rust (Vec)
 cd rust-uint32
+cargo update
 wasm-pack build --target web --release
 cd ..
 

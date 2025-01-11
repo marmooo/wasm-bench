@@ -3,11 +3,13 @@
 
 # Rust (Simple)
 cd rust-simple
+cargo update
 wasm-pack build --target web --release
 cd ..
 
 # Rust (Serde)
 cd rust-serde
+cargo update
 wasm-pack build --target web --release
 cd ..
 
