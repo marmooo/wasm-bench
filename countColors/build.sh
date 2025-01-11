@@ -55,6 +55,7 @@ emcc countup.c -o countup.js \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
+  -s ENVIRONMENT="web,worker" \
   -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
 
@@ -65,6 +66,7 @@ emcc countup.c -o countup.js \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
+  -s ENVIRONMENT="web,worker" \
   -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
 
@@ -75,6 +77,7 @@ emcc countup.cpp -o countup.js --bind \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
+  -s ENVIRONMENT="web,worker" \
   -s EXPORTED_FUNCTIONS=_malloc,_free
 cd ..
 
@@ -84,6 +87,7 @@ emcc countup.cpp -o countup.js --bind \
   -O3 -flto -funroll-loops --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
+  -s ENVIRONMENT="web,worker" \
   -s ALLOW_MEMORY_GROWTH=1
 cd ..
 

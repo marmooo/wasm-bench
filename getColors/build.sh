@@ -37,5 +37,6 @@ emcc color.cpp -o color.js --bind \
   -O3 -flto -funroll-loops --closure 1 \
   -s MODULARIZE \
   -s EXPORT_ES6=1 \
+  -s ENVIRONMENT="web,worker" \
   -s ALLOW_MEMORY_GROWTH=1
 cd ..
